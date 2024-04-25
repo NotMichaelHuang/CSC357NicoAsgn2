@@ -1,0 +1,3 @@
+Parent process (18683) caught signal (Interrupt).
+Forwarding signal (Interrupt) to child.
+Child process (18687) exited due to signal (Interrupt).

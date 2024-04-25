@@ -1,0 +1,25 @@
+=====================
+02_emptyfile diffs (< Reference >Submitted)
+=====================
+  1d0
+  < The top 10 words (out of 0) are:
+---------------------
+Submitted's stderr
+---------------------
+  usage: fw [-n num] [ file1 [ file 2 ...] ]
+=====================
+03_tendistinctwords diffs (< Reference >Submitted)
+=====================
+  4d3
+  <         8 seven
+  5a5
+  >         8 seven
+=====================
+04_emptystdin diffs (< Reference >Submitted)
+=====================
+  1d0
+  < The top 10 words (out of 0) are:
+---------------------
+Submitted's stderr
+---------------------
+  usage: fw [-n num] [ file1 [ file 2 ...] ]

@@ -4,17 +4,21 @@ CFLAGS = -Wall -Wextra -Werror -ansi -pedantic
 all: fw
 
 valgrind: fw
-	valgrind fw
+	valgrind ./fw
 
-fw: clean main.o readlongwords.o
-	${CC} main.o readlongwords.o -o fw
+fw: clean main.o readlongwords.o dict.o
+	${CC} main.o readlongwords.o dict.o -o fw
 
-main.o:
-	${CC} -c -g main.c	
+main.o: readlongwords.h dict.h
+	${CC} -c -g ${CFLAGS} main.c	
 
-readlongwords.o: readlongwords.c
-	${CC} -c -g readlongwords.c
+readlongwords.o: readlongwords.c readlongwords.h
+	${CC} -c -g ${CFLAGS} readlongwords.c
+
+dict.o: dict.o dict.h
+	${CC} -c -g ${CFLAGS} dict.c
+
 clean:
-	rm -f main.o readlongwords.o fw
+	rm -f fw main.o readlongwords.o dict.o
 
 

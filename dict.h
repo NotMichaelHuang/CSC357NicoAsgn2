@@ -15,6 +15,8 @@ typedef struct Dict
     int size;
 } Dict;
 
-Dict *load_words(FILE *);
+
+Dict *dctcreate();
+void load_words(Dict *, FILE *);
 
 

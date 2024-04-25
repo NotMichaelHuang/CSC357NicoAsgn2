@@ -5,6 +5,15 @@
 #include "readlongwords.h"
 
 
+/*
+ * Read string and return a file descriptor if valid.
+ *
+ * Input:
+ * 	char *pot_file: potential file name
+ *
+ * Output:
+ * 	returns a valid file descriptor else NULL
+ * */
 FILE *file_stream(char *pot_file)
 {
 	FILE *valid_fd;
@@ -12,8 +21,7 @@ FILE *file_stream(char *pot_file)
 	valid_fd = fopen(pot_file, "r");	
 	if(valid_fd == NULL)
 	{
-		perror("Unknown file name\n");
-		exit(EXIT_FAILURE);
+		perror(ERR);
 	}
 	return valid_fd;
 }
@@ -38,16 +46,13 @@ char *read_long_words(FILE *stream)
 {
 	char *output_str;
 	char c;
-	size_t space;
-	size_t index;
-	size_t buffer;
+	size_t index, buffer;
 
 	/* Priming the first Letter */
 	index = 0;
 	buffer = INT_BUFFER_SIZE;
 	output_str = (char *)calloc(buffer, sizeof(char));
 
-	c = '\n';
 	while(isalpha((c = fgetc(stream))))
 	{	
 		/* Need more memory on the HEAP!!!!
@@ -63,8 +68,22 @@ char *read_long_words(FILE *stream)
 
 			output_str = resize_buffer(output_str, buffer);	
 		}
+		/* lower case if char is capital */
+		/* 97 is lowercase a and 32 is the offset between the
+ 		 * uppercase and their respected lower case counter part
+ 		 * */
+		if(c < 97)
+		{
+			c += 32;
+		}
 		output_str[index] = c;
 		index++;
+	}	
+	/* Give it a null terminator */
+	output_str[index] = '\0';
+	if(strlen(output_str) < 1)
+	{
+		output_str = NULL;
 	}	
 	return output_str;
 }
